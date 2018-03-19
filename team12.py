@@ -1,3 +1,4 @@
+@@ -0,0 +1,71 @@
 ####
 # Each team's file must define four tokens:
 #     team_name: a string
@@ -7,8 +8,8 @@
 ####
 
 team_name = 'Teaching Ourselves12' # Only 10 chars displayed.
-strategy_name = 'The name the team gives to this strategy'
-strategy_description = 'How does this strategy decide?'
+strategy_name = 'Betray all the time except first'
+strategy_description = 'This strategy chooses "c" first and then "b" no matter what.'
     
 def move(my_history, their_history, my_score, their_score):
     ''' Arguments accepted: my_history, their_history are strings.
@@ -25,8 +26,10 @@ def move(my_history, their_history, my_score, their_score):
     
     # Analyze my_history and their_history and/or my_score and their_score.
     # Decide whether to return 'c' or 'b'.
-    
-    return 'c'
+    if len(my_history) == 0:
+        return 'c'
+    else:
+        return 'b'
 
     
 def test_move(my_history, their_history, my_score, their_score, result):
@@ -45,17 +48,17 @@ def test_move(my_history, their_history, my_score, their_score, result):
             " and should have returned '" + result + "'")
         return False
 
-if __name__ == '__main__':
+    if __name__ == '__main__':
      
-    # Test 1: Betray on first move.
-    if test_move(my_history='',
+        # Test 1: Betray on first move.
+        if test_move(my_history='',
               their_history='', 
               my_score=0,
               their_score=0,
               result='b'):
          print 'Test passed'
-     # Test 2: Continue betraying if they collude despite being betrayed.
-    test_move(my_history='bbb',
+        # Test 2: Continue betraying if they collude despite being betrayed.
+        test_move(my_history='bbb',
               their_history='ccc', 
               # Note the scores are for testing move().
               # The history and scores don't need to match unless
@@ -66,4 +69,3 @@ if __name__ == '__main__':
               my_score=0, 
               their_score=0,
               result='b')             
-              
